@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades Interactivas - Topología</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">∈</span> Topología de Conjuntos
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/concepts" class="nav-link">Conceptos</a></li>
+                <li><a href="/interactive" class="nav-link active">Interactivo</a></li>
+                <li><a href="/quiz" class="nav-link">Quiz</a></li>
+                <li><a href="/glossary" class="nav-link">Glosario</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="interactive-section">
+        <h1>Laboratorio Interactivo de Topología</h1>
+        <p class="section-subtitle">Explora y analiza espacios topológicos en tiempo real</p>
+
+        <div class="interactive-container">
+            <!-- Panel de Control -->
+            <div class="control-panel">
+                <h3>🔧 Selector de Espacio</h3>
+                
+                <div class="control-group">
+                    <label for="space-select">Elige un espacio topológico:</label>
+                    <select id="space-select" onchange="loadSpace()">
+                        <option value="">-- Selecciona un espacio --</option>
+                        {% for key, space in spaces.items() %}
+                        <option value="{{ key }}">{{ space.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div id="space-info" class="space-info" style="display:none;">
+                    <h4 id="space-title"></h4>
+                    <p id="space-description"></p>
+                </div>
+
+                <!-- Análisis de Conjuntos -->
+                <div class="analysis-section" style="display:none;" id="analysis-section">
+                    <h3>📊 Análisis de Conjuntos</h3>
+                    
+                    <div class="control-group">
+                        <label for="subset-input">Ingresa un conjunto para analizar:</label>
+                        <input type="text" id="subset-input" placeholder="Ej: (0,1), [0,1], {1,2,3}" />
+                        <button class="btn btn-primary" onclick="analyzeSubset()">Analizar</button>
+                    </div>
+
+                    <div id="analysis-results" class="results-box" style="display:none;">
+                        <h4>Resultados del Análisis</h4>
+                        <table class="results-table">
+                            <tr>
+                                <td><strong>¿Es Abierto?</strong></td>
+                                <td id="result-open">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>¿Es Cerrado?</strong></td>
+                                <td id="result-closed">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Interior</strong></td>
+                                <td id="result-interior">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Clausura</strong></td>
+                                <td id="result-closure">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Frontera</strong></td>
+                                <td id="result-boundary">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Puntos Límite</strong></td>
+                                <td id="result-limit-points">-</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Operaciones entre Conjuntos -->
+                <div class="operations-section" style="display:none;" id="operations-section">
+                    <h3>🔗 Operaciones entre Conjuntos</h3>
+                    
+                    <div class="control-group">
+                        <label for="set-a">Conjunto A:</label>
+                        <input type="text" id="set-a" placeholder="Ej: (0,1)" />
+                    </div>
+
+                    <div class="control-group">
+                        <label for="set-b">Conjunto B:</label>
+                        <input type="text" id="set-b" placeholder="Ej: [0.5, 2)" />
+                    </div>
+
+                    <div class="control-group">
+                        <label for="operation-select">Operación:</label>
+                        <select id="operation-select">
+                            <option value="union">Unión (A ∪ B)</option>
+                            <option value="intersection">Intersección (A ∩ B)</option>
+                            <option value="difference">Diferencia (A \\ B)</option>
+                            <option value="complement">Complemento (A<sup>c</sup>)</option>
+                            <option value="symmetric_difference">Diferencia Simétrica (A Δ B)</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="performOperation()">Ejecutar</button>
+                    </div>
+
+                    <div id="operation-results" class="results-box" style="display:none;">
+                        <h4>Resultado</h4>
+                        <p id="operation-result" class="operation-result"></p>
+                    </div>
+                </div>
+
+                <!-- Propiedades del Espacio -->
+                <div class="properties-section" style="display:none;" id="properties-section">
+                    <h3>✨ Propiedades del Espacio</h3>
+                    <button class="btn btn-primary" onclick="analyzeSpaceProperties()">Analizar Propiedades</button>
+                    
+                    <div id="properties-results" class="results-box" style="display:none;">
+                        <table class="results-table">
+                            <tr>
+                                <td><strong>¿Es Conexo?</strong></td>
+                                <td id="prop-connected">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>¿Es Compacto?</strong></td>
+                                <td id="prop-compact">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>¿Es Separable?</strong></td>
+                                <td id="prop-separable">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>¿Es Hausdorff?</strong></td>
+                                <td id="prop-hausdorff">-</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Visualización -->
+                <div class="visualization-section" style="display:none;" id="visualization-section">
+                    <h3>📈 Visualización</h3>
+                    <button class="btn btn-primary" onclick="generateVisualization()">Generar Gráfico</button>
+                    <div id="visualization" class="visualization"></div>
+                </div>
+            </div>
+
+            <!-- Panel de Información y Ejemplos -->
+            <div class="info-panel">
+                <h3>📚 Ayuda y Ejemplos</h3>
+                
+                <div class="examples-container">
+                    <h4>Ejemplos de Conjuntos</h4>
+                    <div id="examples-list" class="examples-list"></div>
+                </div>
+
+                <div class="tips-container">
+                    <h4>💡 Consejos</h4>
+                    <ul>
+                        <li>Usa notación estándar: (a,b) para abierto, [a,b] para cerrado</li>
+                        <li>Puedes probar con intervalos, uniones e intersecciones</li>
+                        <li>Compara las propiedades de diferentes conjuntos</li>
+                        <li>Observa cómo cambian interior, clausura y frontera</li>
+                    </ul>
+                </div>
+
+                <div class="glossary-preview">
+                    <h4>Términos Clave</h4>
+                    <dl>
+                        <dt>Abierto</dt>
+                        <dd>Conjunto que contiene una vecindad alrededor de cada uno de sus puntos</dd>
+                        
+                        <dt>Cerrado</dt>
+                        <dd>Conjunto cuyo complemento es abierto</dd>
+                        
+                        <dt>Interior</dt>
+                        <dd>Mayor conjunto abierto contenido en A</dd>
+                        
+                        <dt>Clausura</dt>
+                        <dd>Menor conjunto cerrado que contiene A</dd>
+                        
+                        <dt>Frontera</dt>
+                        <dd>Puntos en la "orilla" del conjunto: ∂A = cl(A) \\ int(A)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Tareas Propuestas -->
+        <section class="tasks-section">
+            <h2>🎯 Actividades Propuestas</h2>
+            
+            <div class="tasks-grid">
+                <div class="task-card">
+                    <h4>Tarea 1: Topología Estándar en ℝ</h4>
+                    <p>Selecciona "Línea Real (ℝ)" y analiza los intervalos (0,1), [0,1], (0,1] y [0,1). ¿Cuáles son abiertos? ¿Cuáles son cerrados?</p>
+                    <button class="btn btn-small" onclick="loadExercise(1)">Realizar</button>
+                </div>
+
+                <div class="task-card">
+                    <h4>Tarea 2: Topología Discreta</h4>
+                    <p>En la topología discreta, todos los subconjuntos son abiertos. Verifica que {1}, {1,2} y {1,2,3,4} son todos conjuntos abiertos.</p>
+                    <button class="btn btn-small" onclick="loadExercise(2)">Realizar</button>
+                </div>
+
+                <div class="task-card">
+                    <h4>Tarea 3: Topología Indiscreta</h4>
+                    <p>En la topología indiscreta solo ∅ y el conjunto completo son abiertos. ¿Qué pasa cuando intentas analizar {1}?</p>
+                    <button class="btn btn-small" onclick="loadExercise(3)">Realizar</button>
+                </div>
+
+                <div class="task-card">
+                    <h4>Tarea 4: Operaciones</h4>
+                    <p>Calcula (0,1) ∪ [1,2), (0,2) ∩ [1,3) y analiza si los resultados son abiertos o cerrados.</p>
+                    <button class="btn btn-small" onclick="loadExercise(4)">Realizar</button>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Portal Educativo de Topología de Conjuntos</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/interactive.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosario - Topología</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">∈</span> Topología de Conjuntos
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/concepts" class="nav-link">Conceptos</a></li>
+                <li><a href="/interactive" class="nav-link">Interactivo</a></li>
+                <li><a href="/quiz" class="nav-link">Quiz</a></li>
+                <li><a href="/glossary" class="nav-link active">Glosario</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="glossary-section">
+        <div class="glossary-container">
+            <h1>Glosario de Topología de Conjuntos</h1>
+            <p class="section-subtitle">Definiciones completas de todos los términos fundamentales</p>
+
+            <!-- Barra de búsqueda -->
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar término..." onkeyup="filterTerms()">
+            </div>
+
+            <!-- Índice alfabético -->
+            <div class="alphabet-index">
+                <a href="#A" onclick="filterByLetter('A')">A</a>
+                <a href="#B" onclick="filterByLetter('B')">B</a>
+                <a href="#C" onclick="filterByLetter('C')">C</a>
+                <a href="#E" onclick="filterByLetter('E')">E</a>
+                <a href="#F" onclick="filterByLetter('F')">F</a>
+                <a href="#I" onclick="filterByLetter('I')">I</a>
+                <a href="#P" onclick="filterByLetter('P')">P</a>
+                <a href="#T" onclick="filterByLetter('T')">T</a>
+                <a href="#" onclick="filterByLetter('')">Ver Todo</a>
+            </div>
+
+            <!-- Términos del glosario dinámicamente cargados -->
+            <div id="glossary-content" class="glossary-content"></div>
+        </div>
+    </section>
+
+    <!-- Sección de Términos Relacionados -->
+    <section class="related-terms-section">
+        <h2>Relaciones entre Conceptos</h2>
+        <div class="concept-map">
+            <div class="concept-node">
+                <h4>Espacio Topológico</h4>
+                <div class="node-children">
+                    <div class="child-node">Conjuntos Abiertos</div>
+                    <div class="child-node">Conjuntos Cerrados</div>
+                </div>
+            </div>
+            <div class="concept-node">
+                <h4>Propiedades de Conjuntos</h4>
+                <div class="node-children">
+                    <div class="child-node">Interior</div>
+                    <div class="child-node">Clausura</div>
+                    <div class="child-node">Frontera</div>
+                    <div class="child-node">Puntos Límite</div>
+                </div>
+            </div>
+            <div class="concept-node">
+                <h4>Propiedades del Espacio</h4>
+                <div class="node-children">
+                    <div class="child-node">Continuidad</div>
+                    <div class="child-node">Compacidad</div>
+                    <div class="child-node">Conexidad</div>
+                    <div class="child-node">Separabilidad</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Fórmulas Importantes -->
+    <section class="formulas-section">
+        <h2>Fórmulas Importantes</h2>
+        <div class="formulas-grid">
+            <div class="formula-card">
+                <h4>Frontiera</h4>
+                <p class="formula">∂A = cl(A) \\ int(A)</p>
+                <p class="formula-alt">∂A = cl(A) ∩ cl(A<sup>c</sup>)</p>
+            </div>
+            <div class="formula-card">
+                <h4>Leyes de De Morgan</h4>
+                <p class="formula">(A ∪ B)<sup>c</sup> = A<sup>c</sup> ∩ B<sup>c</sup></p>
+                <p class="formula-alt">(A ∩ B)<sup>c</sup> = A<sup>c</sup> ∪ B<sup>c</sup></p>
+            </div>
+            <div class="formula-card">
+                <h4>Interior vs Clausura</h4>
+                <p class="formula">int(A<sup>c</sup>) = (cl(A))<sup>c</sup></p>
+                <p class="formula-alt">cl(A<sup>c</sup>) = (int(A))<sup>c</sup></p>
+            </div>
+            <div class="formula-card">
+                <h4>Densidad</h4>
+                <p class="formula">A es denso en X ⟺ cl(A) = X</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Portal Educativo de Topología de Conjuntos</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/glossary.js') }}"></script>
+</body>
+</html>

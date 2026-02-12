@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptos Fundamentales - Topología</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">∈</span> Topología de Conjuntos
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/concepts" class="nav-link active">Conceptos</a></li>
+                <li><a href="/interactive" class="nav-link">Interactivo</a></li>
+                <li><a href="/quiz" class="nav-link">Quiz</a></li>
+                <li><a href="/glossary" class="nav-link">Glosario</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="content-section">
+        <div class="concepts-container">
+            <aside class="concepts-sidebar">
+                <h3>Contenidos</h3>
+                <ul class="concepts-menu">
+                    <li><a href="#axiomas_topologia">Axiomas de una Topología</a></li>
+                    <li><a href="#conjuntos_abiertos">Conjuntos Abiertos</a></li>
+                    <li><a href="#conjuntos_cerrados">Conjuntos Cerrados</a></li>
+                    <li><a href="#interior_clausura">Interior y Clausura</a></li>
+                    <li><a href="#frontera">Frontera de un Conjunto</a></li>
+                    <li><a href="#continuidad">Continuidad de Funciones</a></li>
+                    <li><a href="#compacidad">Compacidad</a></li>
+                    <li><a href="#conexidad">Conexidad</a></li>
+                </ul>
+            </aside>
+
+            <main class="concepts-main">
+                <h1>Conceptos Fundamentales de Topología</h1>
+
+                <!-- Axiomas de una Topología -->
+                <article id="axiomas_topologia" class="concept-article">
+                    <h2>Axiomas de una Topología</h2>
+                    <div class="concept-content">
+                        <p>Una topología τ en un conjunto X es una familia de subconjuntos que satisface tres axiomas fundamentales:</p>
+                        
+                        <div class="axiom-box">
+                            <h4>Axioma 1: Axioma del Conjunto Vacío y Universal</h4>
+                            <p class="formula">∅ ∈ τ  y  X ∈ τ</p>
+                            <p>El conjunto vacío y el conjunto universal siempre deben ser abiertos en cualquier topología.</p>
+                        </div>
+
+                        <div class="axiom-box">
+                            <h4>Axioma 2: Unión Arbitraria</h4>
+                            <p class="formula">Si {U<sub>i</sub> : i ∈ I} ⊆ τ, entonces ⋃<sub>i∈I</sub> U<sub>i</sub> ∈ τ</p>
+                            <p>La unión de cualquier colección de conjuntos abiertos (incluso infinita) es abierta.</p>
+                        </div>
+
+                        <div class="axiom-box">
+                            <h4>Axioma 3: Intersección Finita</h4>
+                            <p class="formula">Si U₁, U₂, ..., U<sub>n</sub> ∈ τ, entonces U₁ ∩ U₂ ∩ ... ∩ U<sub>n</sub> ∈ τ</p>
+                            <p>La intersección de un número finito de conjuntos abiertos es abierta. (Nota: la intersección infinita NOT siempre es abierta)</p>
+                        </div>
+
+                        <div class="important-box">
+                            <strong>Definición Formal:</strong> Un espacio topológico es el par (X, τ) donde X es un conjunto
+                            y τ es una topología en X. Los elementos de τ se llaman conjuntos abiertos.
+                        </div>
+
+                        <div class="example-box">
+                            <h5>Ejemplo: Topología Estándar en ℝ</h5>
+                            <p>La topología estándar en ℝ está generada por intervalos abiertos (a,b). Verifica los axiomas:</p>
+                            <ul>
+                                <li>✓ ∅ es abierto (por convención)</li>
+                                <li>✓ ℝ es abierto</li>
+                                <li>✓ Unión de intervalos abiertos es abierta</li>
+                                <li>✓ Intersección finita de intervalos abiertos es abierta</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Conjuntos Abiertos -->
+                <article id="conjuntos_abiertos" class="concept-article">
+                    <h2>Conjuntos Abiertos</h2>
+                    <div class="concept-content">
+                        <p>Un conjunto U es abierto en un espacio topológico (X, τ) si U ∈ τ.</p>
+                        
+                        <div class="important-box">
+                            <strong>Intuición Geométrica:</strong> Un conjunto es abierto si "alrededor de cada uno de sus puntos
+                            hay un pequeño movimiento que mantiene al punto dentro del conjunto".
+                        </div>
+
+                        <h4>Propiedades Fundamentales</h4>
+                        <ul class="properties-list">
+                            <li><strong>P1:</strong> ∅ y X son siempre abiertos</li>
+                            <li><strong>P2:</strong> La unión de abiertos es abierta</li>
+                            <li><strong>P3:</strong> La intersección finita de abiertos es abierta</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <h5>Ejemplos en ℝ (Topología Estándar)</h5>
+                            <table class="examples-table">
+                                <tr>
+                                    <th>Conjunto</th>
+                                    <th>¿Es Abierto?</th>
+                                    <th>Razón</th>
+                                </tr>
+                                <tr>
+                                    <td>(0,1)</td>
+                                    <td>✓ Sí</td>
+                                    <td>Es un intervalo abierto</td>
+                                </tr>
+                                <tr>
+                                    <td>[0,1]</td>
+                                    <td>✗ No</td>
+                                    <td>Contiene sus puntos frontera 0 y 1</td>
+                                </tr>
+                                <tr>
+                                    <td>(0,1]</td>
+                                    <td>✗ No</td>
+                                    <td>Contiene su frontera en 1</td>
+                                </tr>
+                                <tr>
+                                    <td>(0,∞)</td>
+                                    <td>✓ Sí</td>
+                                    <td>Es un rayo abierto</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="visualize-box">
+                            <h5>Visualización</h5>
+                            <pre class="topology-diagram">
+────────────●───────────●────────────
+            0           1
+
+(0,1):      )───────────(
+            Abierto: puntos frontera excluidos (○)
+
+[0,1]:      ●───────────●
+            Cerrado: puntos frontera incluidos (●)
+                            </pre>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Conjuntos Cerrados -->
+                <article id="conjuntos_cerrados" class="concept-article">
+                    <h2>Conjuntos Cerrados</h2>
+                    <div class="concept-content">
+                        <p>Un conjunto F es cerrado en un espacio topológico (X, τ) si su complemento X \\ F es abierto.</p>
+
+                        <div class="important-box">
+                            <strong>Relación Fundamental:</strong> F es cerrado ⟺ X \\ F es abierto
+                        </div>
+
+                        <h4>Propiedades Fundamentales</h4>
+                        <ul class="properties-list">
+                            <li><strong>P1:</strong> ∅ y X son cerrados</li>
+                            <li><strong>P2:</strong> La intersección de cerrados es cerrada</li>
+                            <li><strong>P3:</strong> La unión finita de cerrados es cerrada</li>
+                        </ul>
+
+                        <div class="warning-box">
+                            <strong>⚠ Aclaración Importante:</strong> No todo conjunto es abierto O cerrado:
+                            <ul>
+                                <li>Algunos conjuntos son abiertos Y cerrados (clopen)</li>
+                                <li>Algunos conjuntos son SOLO abiertos</li>
+                                <li>Algunos conjuntos son SOLO cerrados</li>
+                                <li>Algunos conjuntos son NI abiertos NI cerrados</li>
+                            </ul>
+                        </div>
+
+                        <div class="example-box">
+                            <h5>Ejemplos en ℝ</h5>
+                            <ul>
+                                <li><strong>[0,1] es cerrado</strong> porque su complemento (-∞,0) ∪ (1,∞) es abierto</li>
+                                <li><strong>(0,1) es abierto pero NO cerrado</strong> porque su complemento no es abierto</li>
+                                <li><strong>[0,1) es NI abierto NI cerrado</strong> porque está entre los casos anteriores</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Interior y Clausura -->
+                <article id="interior_clausura" class="concept-article">
+                    <h2>Interior y Clausura de un Conjunto</h2>
+                    <div class="concept-content">
+                        <h4>Interior de A</h4>
+                        <p class="formula">int(A) = A° = ⋃{U : U ⊆ A y U es abierto}</p>
+                        <p>El interior es el <strong>mayor conjunto abierto contenido en A</strong>.</p>
+
+                        <h5>Propiedades del Interior</h5>
+                        <ul class="properties-list">
+                            <li>int(int(A)) = int(A) (idempotencia)</li>
+                            <li>int(A ∩ B) = int(A) ∩ int(B)</li>
+                            <li>int(∅) = ∅ y int(X) = X</li>
+                            <li>A es abierto ⟺ A = int(A)</li>
+                        </ul>
+
+                        <hr>
+
+                        <h4>Clausura de A</h4>
+                        <p class="formula">cl(A) = Ā = ⋂{F : A ⊆ F y F es cerrado}</p>
+                        <p>La clausura es el <strong>menor conjunto cerrado que contiene a A</strong>.</p>
+
+                        <h5>Propiedades de la Clausura</h5>
+                        <ul class="properties-list">
+                            <li>cl(cl(A)) = cl(A) (idempotencia)</li>
+                            <li>cl(A ∪ B) = cl(A) ∪ cl(B)</li>
+                            <li>cl(∅) = ∅ y cl(X) = X</li>
+                            <li>A es cerrado ⟺ A = cl(A)</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <h5>Ejemplos en ℝ</h5>
+                            <table class="examples-table">
+                                <tr>
+                                    <th>Conjunto A</th>
+                                    <th>int(A)</th>
+                                    <th>cl(A)</th>
+                                </tr>
+                                <tr>
+                                    <td>(0,1)</td>
+                                    <td>(0,1)</td>
+                                    <td>[0,1]</td>
+                                </tr>
+                                <tr>
+                                    <td>[0,1]</td>
+                                    <td>(0,1)</td>
+                                    <td>[0,1]</td>
+                                </tr>
+                                <tr>
+                                    <td>[0,1)</td>
+                                    <td>(0,1)</td>
+                                    <td>[0,1]</td>
+                                </tr>
+                                <tr>
+                                    <td>{1/n : n ∈ ℕ} ∪ {0}</td>
+                                    <td>∅</td>
+                                    <td>El conjunto completo</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Frontera -->
+                <article id="frontera" class="concept-article">
+                    <h2>Frontera (Borde) de un Conjunto</h2>
+                    <div class="concept-content">
+                        <p class="formula">∂A = cl(A) \\ int(A) = cl(A) ∩ cl(A<sup>c</sup>)</p>
+                        <p>La frontera está formada por los puntos que están "en la orilla" del conjunto.</p>
+
+                        <h5>Propiedades de la Frontera</h5>
+                        <ul class="properties-list">
+                            <li>∂(∂A) = ∂A</li>
+                            <li>∂A es siempre cerrado</li>
+                            <li>A es abierto ⟺ ∂A ∩ A = ∅</li>
+                            <li>A es cerrado ⟺ ∂A ⊆ A</li>
+                            <li>∂A = ∅ ⟺ A es abierto y cerrado</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <h5>Ejemplos en ℝ</h5>
+                            <ul>
+                                <li><strong>∂(0,1) = {0,1}</strong> (los extremos)</li>
+                                <li><strong>∂[0,1] = {0,1}</strong> (los extremos, aunque estén incluidos)</li>
+                                <li><strong>∂[0,1) = {0,1}</strong></li>
+                                <li><strong>∂ℚ = ℝ</strong> (los racionales están "esparcidos" en ℝ)</li>
+                            </ul>
+                        </div>
+
+                        <div class="visualize-box">
+                            <h5>Relación entre int, cl, y ∂</h5>
+                            <pre class="topology-diagram">
+X = int(A) ∪ ∂A ∪ int(A<sup>c</sup>)
+
+[Interior de A] [Frontera] [Interior del complemento]
+      (región A)  (borde)  (región fuera de A)
+                            </pre>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Continuidad -->
+                <article id="continuidad" class="concept-article">
+                    <h2>Continuidad de Funciones</h2>
+                    <div class="concept-content">
+                        <p>Una función f: X → Y entre espacios topológicos es <strong>continua</strong> si:</p>
+                        <p class="formula">Para todo U ⊆ Y abierto, f<sup>-1</sup>(U) es abierto en X</p>
+
+                        <div class="important-box">
+                            <strong>Teorema Fundamental de Continuidad:</strong> f es continua en X si y solo si
+                            la preimagen de todo abierto en Y es abierto en X.
+                        </div>
+
+                        <h5>Propiedades</h5>
+                        <ul class="properties-list">
+                            <li>La composición de funciones continuas es continua</li>
+                            <li>Si f: X → Y es continua y X es conexo, entonces f(X) es conexo</li>
+                            <li>Si f: X → Y es continua y X es compacto, entonces f(X) es compacto</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <h5>Ejemplos</h5>
+                            <ul>
+                                <li><strong>f(x) = x² es continua</strong> en ℝ con topología estándar</li>
+                                <li><strong>f(x) = 1/x es continua</strong> en (0,∞)</li>
+                                <li><strong>La función escalón</strong> es discontinua en puntos de salto</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Compacidad -->
+                <article id="compacidad" class="concept-article">
+                    <h2>Compacidad</h2>
+                    <div class="concept-content">
+                        <p>Un espacio topológico X es <strong>compacto</strong> si:</p>
+                        <p class="formula">De todo recubrimiento abierto se puede extraer un subrecubrimiento finito</p>
+
+                        <div class="important-box">
+                            <strong>Teorema de Heine-Borel (ℝ):</strong> Un conjunto en ℝ es compacto si y solo si es cerrado y acotado.
+                        </div>
+
+                        <h5>Propiedades</h5>
+                        <ul class="properties-list">
+                            <li>La imagen continua de un compacto es compacta</li>
+                            <li>Todo subconjunto cerrado de un compacto es compacto</li>
+                            <li>En un Hausdorff, todo compacto es cerrado</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <h5>Ejemplos</h5>
+                            <ul>
+                                <li><strong>[0,1] es compacto</strong></li>
+                                <li><strong>(0,1) NO es compacto</strong> (recubrimiento de intervalos (1/n, 1-1/n))</li>
+                                <li><strong>ℝ NO es compacto</strong></li>
+                                <li><strong>Un conjunto finito es compacto</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Conexidad -->
+                <article id="conexidad" class="concept-article">
+                    <h2>Conexidad</h2>
+                    <div class="concept-content">
+                        <p>Un espacio X es <strong>conexo</strong> si:</p>
+                        <p class="formula">No puede escribirse como unión disjunta de dos abiertos no vacíos</p>
+
+                        <div class="important-box">
+                            <strong>Intuición:</strong> Un espacio es conexo si está "conectado de una sola pieza".
+                        </div>
+
+                        <h5>Propiedades</h5>
+                        <ul class="properties-list">
+                            <li>La imagen continua de un conexo es conexa (Teorema del Valor Intermedio)</li>
+                            <li>La unión de conexos con intersección no vacía es conexa</li>
+                            <li>El producto de espacios conexos es conexo</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <h5>Ejemplos</h5>
+                            <ul>
+                                <li><strong>ℝ es conexo</strong></li>
+                                <li><strong>[0,1] es conexo</strong></li>
+                                <li><strong>(0,1) es conexo</strong></li>
+                                <li><strong>ℚ NO es conexo</strong> (separado por irracionales)</li>
+                                <li><strong>(0,1) ∪ (2,3) NO es conexo</strong> (es unión disjunta de abiertos)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Portal Educativo de Topología de Conjuntos</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

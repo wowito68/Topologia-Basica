@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario - Topología</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">∈</span> Topología de Conjuntos
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/concepts" class="nav-link">Conceptos</a></li>
+                <li><a href="/interactive" class="nav-link">Interactivo</a></li>
+                <li><a href="/quiz" class="nav-link active">Quiz</a></li>
+                <li><a href="/glossary" class="nav-link">Glosario</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="quiz-section">
+        <div class="quiz-container">
+            <h1>Cuestionario de Topología</h1>
+            <p class="section-subtitle">Prueba tus conocimientos sobre topología de conjuntos</p>
+
+            <!-- Pantalla de Inicio -->
+            <div id="quiz-intro" class="quiz-screen">
+                <h2>Bienvenido al Cuestionario</h2>
+                <div class="quiz-info">
+                    <p>Este cuestionario contiene preguntas sobre conceptos fundamentales de topología.</p>
+                    <ul class="info-list">
+                        <li>✓ 5 preguntas de opción múltiple</li>
+                        <li>✓ Retroalimentación inmediata</li>
+                        <li>✓ Explicaciones detalladas</li>
+                        <li>✓ Puntuación final</li>
+                    </ul>
+                    <button class="btn btn-primary btn-large" onclick="startQuiz()">Comenzar Cuestionario</button>
+                </div>
+            </div>
+
+            <!-- Pantalla de Preguntas -->
+            <div id="quiz-content" class="quiz-screen" style="display:none;">
+                <div class="quiz-progress">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <p id="question-counter">Pregunta 1 de 5</p>
+                </div>
+
+                <div class="question-container">
+                    <h3 id="question-text"></h3>
+                    
+                    <div id="options-container" class="options-container"></div>
+
+                    <div id="explanation" class="explanation" style="display:none;">
+                        <h4>Explicación</h4>
+                        <p id="explanation-text"></p>
+                    </div>
+
+                    <div class="quiz-buttons">
+                        <button id="submit-btn" class="btn btn-primary" onclick="submitAnswer()">Enviar Respuesta</button>
+                        <button id="next-btn" class="btn btn-secondary" onclick="nextQuestion()" style="display:none;">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla de Resultados -->
+            <div id="quiz-results" class="quiz-screen" style="display:none;">
+                <h2>Cuestionario Completado</h2>
+                
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span id="final-score">0</span>
+                        <span class="score-total">/5</span>
+                    </div>
+                    <p id="score-message"></p>
+                </div>
+
+                <div class="results-summary">
+                    <h3>Resumen de Respuestas</h3>
+                    <div id="results-list"></div>
+                </div>
+
+                <div class="results-feedback">
+                    <h3>Retroalimentación</h3>
+                    <p id="feedback-text"></p>
+                </div>
+
+                <div class="results-buttons">
+                    <button class="btn btn-primary" onclick="restartQuiz()">Reintentar</button>
+                    <a href="/concepts" class="btn btn-secondary">Revisar Conceptos</a>
+                    <a href="/" class="btn btn-secondary">Volver al Inicio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Estadísticas (opcional) -->
+    <section class="stats-section">
+        <h2>📊 Estadísticas</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h4>Mejor Puntuación</h4>
+                <p class="stat-value" id="best-score">-</p>
+            </div>
+            <div class="stat-card">
+                <h4>Promedio</h4>
+                <p class="stat-value" id="avg-score">-</p>
+            </div>
+            <div class="stat-card">
+                <h4>Intentos</h4>
+                <p class="stat-value" id="attempts">0</p>
+            </div>
+            <div class="stat-card">
+                <h4>Tópico Más Fuerte</h4>
+                <p class="stat-value" id="strongest-topic">-</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Portal Educativo de Topología de Conjuntos</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+</body>
+</html>

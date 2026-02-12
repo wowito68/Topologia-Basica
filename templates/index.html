@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topología de Conjuntos - Portal Educativo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">∈</span> Topología de Conjuntos
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link active">Inicio</a></li>
+                <li><a href="/concepts" class="nav-link">Conceptos</a></li>
+                <li><a href="/interactive" class="nav-link">Interactivo</a></li>
+                <li><a href="/quiz" class="nav-link">Quiz</a></li>
+                <li><a href="/glossary" class="nav-link">Glosario</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Bienvenido a Topología de Conjuntos</h1>
+            <p>Plataforma educativa interactiva para aprender topología matemática</p>
+            <button class="btn btn-primary" onclick="document.querySelector('.features').scrollIntoView({behavior: 'smooth'})">
+                Comenzar
+            </button>
+        </div>
+    </header>
+
+    <section class="features">
+        <h2>¿Qué aprenderás?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Conceptos Fundamentales</h3>
+                <p>Aprende los axiomas de la topología, conjuntos abiertos, cerrados y propiedades esenciales.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔬</div>
+                <h3>Espacios Topológicos</h3>
+                <p>Explora espacios como ℝ, topología discreta, indiscreta y más.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>Actividades Interactivas</h3>
+                <p>Analiza conjuntos, visualiza topologías y experimenta con ejemplos reales.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Visualizaciones</h3>
+                <p>Gráficas interactivas que ayudan a comprender conceptos abstractos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">❓</div>
+                <h3>Evaluación</h3>
+                <p>Prueba tus conocimientos con cuestionarios diseñados por expertos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📖</div>
+                <h3>Glosario Completo</h3>
+                <p>Consulta definiciones y ejemplos de todos los términos matemáticos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-start">
+        <h2>Espacios Topológicos Disponibles</h2>
+        <div class="spaces-grid">
+            {% for key, space in spaces.items() %}
+            <div class="space-card" onclick="viewSpace('{{ key }}')">
+                <h4>{{ space.name }}</h4>
+                <p>{{ space.description }}</p>
+                <span class="arrow">→</span>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="learning-path">
+        <h2>Ruta de Aprendizaje Recomendada</h2>
+        <div class="path-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Fundamentos</h4>
+                    <p>Aprende qué es una topología y sus axiomas básicos</p>
+                    <a href="/concepts#axiomas_topologia" class="btn btn-small">Ver</a>
+                </div>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Conjuntos Abiertos y Cerrados</h4>
+                    <p>Entiende las propiedades de conjuntos abiertos y cerrados</p>
+                    <a href="/concepts#conjuntos_abiertos" class="btn btn-small">Ver</a>
+                </div>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Operaciones Topológicas</h4>
+                    <p>Explora interior, clausura y frontera de conjuntos</p>
+                    <a href="/concepts#interior_clausura" class="btn btn-small">Ver</a>
+                </div>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Propiedades Avanzadas</h4>
+                    <p>Aprende sobre compacidad, conexidad y continuidad</p>
+                    <a href="/concepts#compacidad" class="btn btn-small">Ver</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>¿Listo para empezar?</h2>
+        <p>Con la herramienta interactiva aprenderás a:</p>
+        <ul class="benefits-list">
+            <li>✓ Identificar si un conjunto es abierto o cerrado</li>
+            <li>✓ Calcular interior, clausura y frontera de conjuntos</li>
+            <li>✓ Entender la topología en diferentes espacios</li>
+            <li>✓ Aplicar conceptos a problemas reales</li>
+        </ul>
+        <div class="cta-buttons">
+            <a href="/interactive" class="btn btn-primary">Ir a Actividades Interactivas</a>
+            <a href="/concepts" class="btn btn-secondary">Leer Conceptos</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Portal Educativo de Topología de Conjuntos | Matemáticas Avanzadas</p>
+    </footer>
+
+    <script>
+        function viewSpace(spaceType) {
+            // Redirigir a la página interactiva con el espacio seleccionado
+            window.location.href = `/interactive?space=${spaceType}`;
+        }
+    </script>
+</body>
+</html>
