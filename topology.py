@@ -200,7 +200,7 @@ def check_compactness(space_type: str) -> bool:
     """Verifica si el espacio es compacto"""
     compactness = {
         'real_line': False,
-        'discrete': False,
+        'discrete': True,   # {1,2,3,4} es finito, todo espacio finito es compacto
         'indiscrete': True,
         'cofinite': False,
         'euclidean_plane': False
@@ -442,7 +442,7 @@ TOPOLOGICAL_CONCEPTS = {
         **Significado**: Puntos que están "en la orilla" del conjunto.
         
         **Propiedades**:
-        - ∂(∂A) = ∂A
+        - ∂(∂A) ⊆ ∂A (la frontera de la frontera está contenida en la frontera)
         - ∂A es siempre cerrado
         - A es abierto ⟺ ∂A ∩ A = ∅
         - A es cerrado ⟺ ∂A ⊆ A

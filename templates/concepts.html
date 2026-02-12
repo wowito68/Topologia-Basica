@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conceptos Fundamentales - Topología</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="navbar-container">
@@ -45,34 +47,41 @@
                 <article id="axiomas_topologia" class="concept-article">
                     <h2>Axiomas de una Topología</h2>
                     <div class="concept-content">
-                        <p>Una topología τ en un conjunto X es una familia de subconjuntos que satisface tres axiomas fundamentales:</p>
-                        
+                        <p>Una topología τ en un conjunto X es una familia de subconjuntos que satisface tres axiomas
+                            fundamentales:</p>
+
                         <div class="axiom-box">
                             <h4>Axioma 1: Axioma del Conjunto Vacío y Universal</h4>
-                            <p class="formula">∅ ∈ τ  y  X ∈ τ</p>
-                            <p>El conjunto vacío y el conjunto universal siempre deben ser abiertos en cualquier topología.</p>
+                            <p class="formula">∅ ∈ τ y X ∈ τ</p>
+                            <p>El conjunto vacío y el conjunto universal siempre deben ser abiertos en cualquier
+                                topología.</p>
                         </div>
 
                         <div class="axiom-box">
                             <h4>Axioma 2: Unión Arbitraria</h4>
-                            <p class="formula">Si {U<sub>i</sub> : i ∈ I} ⊆ τ, entonces ⋃<sub>i∈I</sub> U<sub>i</sub> ∈ τ</p>
+                            <p class="formula">Si {U<sub>i</sub> : i ∈ I} ⊆ τ, entonces ⋃<sub>i∈I</sub> U<sub>i</sub> ∈
+                                τ</p>
                             <p>La unión de cualquier colección de conjuntos abiertos (incluso infinita) es abierta.</p>
                         </div>
 
                         <div class="axiom-box">
                             <h4>Axioma 3: Intersección Finita</h4>
-                            <p class="formula">Si U₁, U₂, ..., U<sub>n</sub> ∈ τ, entonces U₁ ∩ U₂ ∩ ... ∩ U<sub>n</sub> ∈ τ</p>
-                            <p>La intersección de un número finito de conjuntos abiertos es abierta. (Nota: la intersección infinita NOT siempre es abierta)</p>
+                            <p class="formula">Si U₁, U₂, ..., U<sub>n</sub> ∈ τ, entonces U₁ ∩ U₂ ∩ ... ∩ U<sub>n</sub>
+                                ∈ τ</p>
+                            <p>La intersección de un número finito de conjuntos abiertos es abierta. (Nota: la
+                                intersección infinita NO siempre es abierta)</p>
                         </div>
 
                         <div class="important-box">
-                            <strong>Definición Formal:</strong> Un espacio topológico es el par (X, τ) donde X es un conjunto
+                            <strong>Definición Formal:</strong> Un espacio topológico es el par (X, τ) donde X es un
+                            conjunto
                             y τ es una topología en X. Los elementos de τ se llaman conjuntos abiertos.
                         </div>
 
                         <div class="example-box">
                             <h5>Ejemplo: Topología Estándar en ℝ</h5>
-                            <p>La topología estándar en ℝ está generada por intervalos abiertos (a,b). Verifica los axiomas:</p>
+                            <p>La topología estándar en ℝ está generada por intervalos abiertos (a,b). Verifica los
+                                axiomas:</p>
                             <ul>
                                 <li>✓ ∅ es abierto (por convención)</li>
                                 <li>✓ ℝ es abierto</li>
@@ -88,9 +97,10 @@
                     <h2>Conjuntos Abiertos</h2>
                     <div class="concept-content">
                         <p>Un conjunto U es abierto en un espacio topológico (X, τ) si U ∈ τ.</p>
-                        
+
                         <div class="important-box">
-                            <strong>Intuición Geométrica:</strong> Un conjunto es abierto si "alrededor de cada uno de sus puntos
+                            <strong>Intuición Geométrica:</strong> Un conjunto es abierto si "alrededor de cada uno de
+                            sus puntos
                             hay un pequeño movimiento que mantiene al punto dentro del conjunto".
                         </div>
 
@@ -152,7 +162,8 @@
                 <article id="conjuntos_cerrados" class="concept-article">
                     <h2>Conjuntos Cerrados</h2>
                     <div class="concept-content">
-                        <p>Un conjunto F es cerrado en un espacio topológico (X, τ) si su complemento X \\ F es abierto.</p>
+                        <p>Un conjunto F es cerrado en un espacio topológico (X, τ) si su complemento X \\ F es abierto.
+                        </p>
 
                         <div class="important-box">
                             <strong>Relación Fundamental:</strong> F es cerrado ⟺ X \\ F es abierto
@@ -178,9 +189,12 @@
                         <div class="example-box">
                             <h5>Ejemplos en ℝ</h5>
                             <ul>
-                                <li><strong>[0,1] es cerrado</strong> porque su complemento (-∞,0) ∪ (1,∞) es abierto</li>
-                                <li><strong>(0,1) es abierto pero NO cerrado</strong> porque su complemento no es abierto</li>
-                                <li><strong>[0,1) es NI abierto NI cerrado</strong> porque está entre los casos anteriores</li>
+                                <li><strong>[0,1] es cerrado</strong> porque su complemento (-∞,0) ∪ (1,∞) es abierto
+                                </li>
+                                <li><strong>(0,1) es abierto pero NO cerrado</strong> porque su complemento no es
+                                    abierto</li>
+                                <li><strong>[0,1) es NI abierto NI cerrado</strong> porque está entre los casos
+                                    anteriores</li>
                             </ul>
                         </div>
                     </div>
@@ -258,7 +272,7 @@
 
                         <h5>Propiedades de la Frontera</h5>
                         <ul class="properties-list">
-                            <li>∂(∂A) = ∂A</li>
+                            <li>∂(∂A) ⊆ ∂A (la frontera de la frontera está contenida en la frontera)</li>
                             <li>∂A es siempre cerrado</li>
                             <li>A es abierto ⟺ ∂A ∩ A = ∅</li>
                             <li>A es cerrado ⟺ ∂A ⊆ A</li>
@@ -325,7 +339,8 @@ X = int(A) ∪ ∂A ∪ int(A<sup>c</sup>)
                         <p class="formula">De todo recubrimiento abierto se puede extraer un subrecubrimiento finito</p>
 
                         <div class="important-box">
-                            <strong>Teorema de Heine-Borel (ℝ):</strong> Un conjunto en ℝ es compacto si y solo si es cerrado y acotado.
+                            <strong>Teorema de Heine-Borel (ℝ):</strong> Un conjunto en ℝ es compacto si y solo si es
+                            cerrado y acotado.
                         </div>
 
                         <h5>Propiedades</h5>
@@ -339,7 +354,8 @@ X = int(A) ∪ ∂A ∪ int(A<sup>c</sup>)
                             <h5>Ejemplos</h5>
                             <ul>
                                 <li><strong>[0,1] es compacto</strong></li>
-                                <li><strong>(0,1) NO es compacto</strong> (recubrimiento de intervalos (1/n, 1-1/n))</li>
+                                <li><strong>(0,1) NO es compacto</strong> (recubrimiento de intervalos (1/n, 1-1/n))
+                                </li>
                                 <li><strong>ℝ NO es compacto</strong></li>
                                 <li><strong>Un conjunto finito es compacto</strong></li>
                             </ul>
@@ -387,4 +403,5 @@ X = int(A) ∪ ∂A ∪ int(A<sup>c</sup>)
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
+
 </html>

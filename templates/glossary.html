@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glosario - Topología</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="navbar-container">
@@ -87,7 +89,7 @@
         <h2>Fórmulas Importantes</h2>
         <div class="formulas-grid">
             <div class="formula-card">
-                <h4>Frontiera</h4>
+                <h4>Frontera</h4>
                 <p class="formula">∂A = cl(A) \\ int(A)</p>
                 <p class="formula-alt">∂A = cl(A) ∩ cl(A<sup>c</sup>)</p>
             </div>
@@ -114,4 +116,5 @@
 
     <script src="{{ url_for('static', filename='js/glossary.js') }}"></script>
 </body>
+
 </html>

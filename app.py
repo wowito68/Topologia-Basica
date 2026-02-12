@@ -3,8 +3,12 @@ Aplicación Flask para enseñanza interactiva de Topología de Conjuntos
 Autor: Sistema Educativo
 """
 
+import os
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify
 import json
+
+load_dotenv()
 from topology import (
     TopologicalSpace, 
     set_operations,
@@ -23,6 +27,7 @@ from topology import (
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key')
 
 # Espacios topológicos predefinidos
 predefined_spaces = {
@@ -48,7 +53,7 @@ predefined_spaces = {
         'name': 'Topología Cofinita',
         'description': 'Abiertos: ∅ y complementos de conjuntos finitos',
         'X': 'ℕ',
-        'sets': ['∅', 'ℕ', 'ℕ\{1}', 'ℕ\{1,2,3}']
+        'sets': ['∅', 'ℕ', 'ℕ\\{1}', 'ℕ\\{1,2,3}']
     },
     'euclidean_plane': {
         'name': 'Plano Euclidiano (ℝ²)',
@@ -132,8 +137,8 @@ def get_space_properties():
         properties = {
             'is_connected': check_connectedness(space_type),
             'is_compact': check_compactness(space_type),
-            'is_separable': True if space_type == 'real_line' else False,
-            'is_hausdorff': space_type != 'indiscrete',
+            'is_separable': space_type in ('real_line', 'discrete', 'cofinite', 'euclidean_plane'),
+            'is_hausdorff': space_type not in ('indiscrete', 'cofinite'),
             'description': f"Propiedades de {predefined_spaces[space_type]['name']}"
         }
         return jsonify(properties)
@@ -300,4 +305,5 @@ def server_error(error):
     return render_template('500.html'), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    debug = os.getenv('FLASK_DEBUG', '1') == '1'
+    app.run(debug=debug, host='127.0.0.1', port=5000)
